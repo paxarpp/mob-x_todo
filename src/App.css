@@ -36,3 +36,24 @@
   background-color: #00a4ff;
   color: #fff;
 }
+.btn.done {
+  background-color: green;
+}
+.btn.undone {
+  background-color: red;
+}
+.card {
+  max-width: 50%;
+  margin: 10px auto;
+  box-shadow: 2px 2px 10px 0px;
+  padding: 10px;
+}
+.card-body {
+  padding: 5px;
+}
+.card-title {
+
+}
+.card-title.done {
+  text-decoration: line-through;
+}

@@ -1,11 +1,13 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 
-const TodoList = ({todo}) => {
-return(
-    <div className="card" >
+const TodoList = ({todo, store}) => (
+    <div className="card">
         <div className="card-body">
-            <h4 className="card-title">{todo.name}</h4>
+            <h4 className={`card-title ${todo.is_done ? 'done' : ''}`}>{todo.name}</h4>
+            <button  onClick={() => store.remove(todo)}>
+                удалить
+            </button>
             <div>
                 {todo.details}
             </div>
@@ -13,17 +15,13 @@ return(
         <div className="status" > 
             {todo.status()}
         </div>
-        {
-            !todo.is_done && 
-            <button  
-                className="btn"  
-                onClick={todo.markDone}
-            >
-                Done
-            </button>
-        }
+        <button  
+            className={`btn ${!todo.is_done ? 'done' : 'undone'}`} 
+            onClick={!todo.is_done ? todo.markDone : todo.markUnDone}
+        >
+            {!todo.is_done ? 'Выполнить' : 'Отменить'}
+        </button>
     </div>
-    )
-}
+)
 
 export default observer(TodoList);
