@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 
-const TodoCard = ({todo, handleRemove}) => (
+const TodoCard = ({todo, handleRemove, selectedTab}) => (
     <div className="card">
         <div className="card-body">
             <h4 className={`card-title ${todo.is_done ? 'done' : ''}`}>{todo.name}</h4>
@@ -12,7 +12,7 @@ const TodoCard = ({todo, handleRemove}) => (
                 {todo.details}
             </div>
         </div>
-        <div className="status" onClick={!todo.is_done ? todo.markDone : todo.markUnDone}> 
+        <div className="status" onClick={!todo.is_done ? () => todo.markDone(selectedTab) : () => todo.markUnDone(selectedTab)}> 
             {
                 todo.is_done ? String.fromCharCode(10004) : ''
             }

@@ -2,10 +2,11 @@ import { types } from 'mobx-state-tree';
 import Todo from './Todo';
 import uuidv4 from 'uuid/v4';
 
-const TaskStore = types.model('Todo', { Todo: types.array(Todo) })
+const TaskStore = types.model('Todo', { Todo: types.array(Todo), selectedTab: types.string })
   .actions(self => ({
     add(task) {
       task.id = uuidv4();
+      task.isShow = self.selectedTab === 'undone' || self.selectedTab === 'all';
       self.Todo.push(task);
     },
     remove(task) {
@@ -14,6 +15,7 @@ const TaskStore = types.model('Todo', { Todo: types.array(Todo) })
     },
     showAll() {
       self.Todo.forEach(todo => todo.isShow = true);
+      self.selectedTab = 'all';
     },
     showDone() {
       self.Todo.forEach(todo => {
@@ -23,6 +25,7 @@ const TaskStore = types.model('Todo', { Todo: types.array(Todo) })
           todo.isShow = false;
         }
       });
+      self.selectedTab = 'done';
     },
     showUndone() {
       self.Todo.forEach(todo => {
@@ -32,6 +35,7 @@ const TaskStore = types.model('Todo', { Todo: types.array(Todo) })
           todo.isShow = true;
         }
       });
+      self.selectedTab = 'undone';
     }
   })
 );

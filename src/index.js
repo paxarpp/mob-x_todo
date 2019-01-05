@@ -8,7 +8,7 @@ import TaskStore from './models/TaskStore';
 import { onPatch } from 'mobx-state-tree';
 import makeInspectable from 'mobx-devtools-mst';
 
-const store = TaskStore.create({});
+const store = TaskStore.create({Todo: [], selectedTab: 'all'});
 
 onPatch(store, patch => {
   console.log(patch)

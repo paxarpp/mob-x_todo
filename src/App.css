@@ -82,7 +82,28 @@
 }
 
 .tab {
+  position: relative;
   display: inline-block;
   padding: 5px 10px;
   cursor: pointer;
+  background-color: #fff;
+  font-weight: 200;
+  color: #000;
+  border-bottom: 2px solid rgb(205, 255, 200);
+  min-width: 140px;
+}
+.tab.active {
+  background-color: rgb(205, 255, 200);
+  font-weight: 600;
+  color: #000;
+  border-radius: 8px 8px 0 0;
+}
+.tab .tab__count {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 0.6em;
+}
+form > label {
+  margin: 5px 10px;
 }

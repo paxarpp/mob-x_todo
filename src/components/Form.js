@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 class Form extends Component {
 
     render() {
+        const {store} = this.props;
         return(
             <form
                 onSubmit={e =>{
                 e.preventDefault();
-                this.props.store.add({
+                store.add({
                     name: this.nameInput.value,
                     details: this.detailsInput.value,
-                        });
+                    });
                 e.target.reset();
                 this.nameInput.focus();
                 }}>

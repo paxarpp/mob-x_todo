@@ -5,13 +5,15 @@ const Todo = types.model('Todo', {
         details: types.string,
         is_done: false,
         id: types.string,
-        isShow: true,
+        isShow: types.boolean,
     }
 ).actions(self => ({
-    markDone() {
+    markDone(selectedTab) {
+        self.isShow = selectedTab !== 'undone';
         self.is_done = true;
     },
-    markUnDone() {
+    markUnDone(selectedTab) {
+        self.isShow = selectedTab !== 'done';
         self.is_done = false;
     }
 })).views(self => ({
@@ -20,4 +22,4 @@ const Todo = types.model('Todo', {
     }
 }));
 
- export default Todo;
+export default Todo;
