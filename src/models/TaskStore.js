@@ -1,10 +1,11 @@
 import { types } from 'mobx-state-tree';
 import Todo from './Todo';
+import Tab from './Tab';
 import uuidv4 from 'uuid/v4';
 
 const TaskStore = types.model({ 
-  Todo: types.array(Todo), 
-  selectedTab: types.string,
+  Todo: types.array(Todo),
+  Tab: types.array(Tab),
 })
   .actions(self => ({
     add(task) {
@@ -15,10 +16,12 @@ const TaskStore = types.model({
       const index = self.Todo.findIndex(todo => todo.id === task.id);
       self.Todo.splice(index, 1);
     },
-    showTab(tab) {
-      self.selectedTab = tab;
-    }
-  }))
+    showTab(id) {
+      self.Tab = self.Tab.map(t => {
+        t.isActive = id === t.id;
+        return t;
+      });
+    }}))
   .views(self =>({
     get doneTodo() {
       return self.Todo.filter(todo => todo.is_done);
@@ -26,6 +29,16 @@ const TaskStore = types.model({
     get undoneTodo() {
       return self.Todo.filter(todo => !todo.is_done);
     },
-  }))
+    get ActiveTabId() {
+      return self.Tab.find(t => t.isActive).id;
+    },
+    get todoLengthByIdTab() {
+      return ({
+        1: self.Todo.length, 
+        2: self.Todo.filter(t => t.is_done).length, 
+        3: self.Todo.filter(t => !t.is_done).length
+      })
+    }
+  }));
 
 export default TaskStore;

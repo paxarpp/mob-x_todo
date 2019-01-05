@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react'; //These functions make our components observable and be able to use the store
 import TodoCard from '../components/TodoCard';
+import Tab from '../components/Tab';
 import Form from '../components/Form';
 import '../App.css';
 
@@ -11,25 +12,20 @@ class App extends Component {
         store.remove(todo);
     }
 
-    showTab = (tab) => () => {
+    markActive = (id) => () => {
         const { store } = this.props;
-        store.showTab(tab);
-    }
-
-    isActive = name => {
-        const { store } = this.props;
-        return store.selectedTab === name ? 'active' : '';
+        store.showTab(id);
     }
   
     render() {
     const { store } = this.props;
-    const _todos = store.selectedTab === 'all' ? 
+    const _todos = store.ActiveTabId === 1 ? 
         store.Todo
         :
-        store.selectedTab === 'done' ?
+        store.ActiveTabId === 2 ?
             store.doneTodo
             :
-            store.selectedTab === 'undone' &&
+            store.ActiveTabId === 3 &&
             store.undoneTodo
         return (
             <div className="App">
@@ -38,18 +34,14 @@ class App extends Component {
                 </header>
                 <div>
                     <Form store={store}/>
-                    <span className={`tab ${this.isActive('all')}`} onClick={this.showTab('all')}>
-                        все
-                        <span className="tab__count">{store.Todo.length}</span>
-                    </span>
-                    <span className={`tab ${this.isActive('done')}`} onClick={this.showTab('done')}>
-                        выполненные
-                        <span className="tab__count">{store.doneTodo.length}</span>
-                    </span>
-                    <span className={`tab ${this.isActive('undone')}`} onClick={this.showTab('undone')}>
-                        Не выполненные
-                        <span className="tab__count">{store.undoneTodo.length}</span>
-                    </span>
+                    {
+                        store.Tab.map((tb, i) => (
+                            <Tab tab={tb} 
+                                key={`${i}-${tb.title}`} 
+                                markActive={this.markActive}
+                                todoLengthByIdTab={store.todoLengthByIdTab} />
+                        ))
+                    }
                 </div>
                 <div className="card-container">
                     {_todos.map((todo, i) => (

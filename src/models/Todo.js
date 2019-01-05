@@ -1,6 +1,6 @@
 import { types } from 'mobx-state-tree';
 
-const Todo = types.model('Todo', {
+const Todo = types.model({
         name: types.string,
         details: types.string,
         is_done: false,
