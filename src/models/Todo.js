@@ -5,20 +5,13 @@ const Todo = types.model('Todo', {
         details: types.string,
         is_done: false,
         id: types.string,
-        isShow: types.boolean,
     }
 ).actions(self => ({
-    markDone(selectedTab) {
-        self.isShow = selectedTab !== 'undone';
+    markDone() {
         self.is_done = true;
     },
-    markUnDone(selectedTab) {
-        self.isShow = selectedTab !== 'done';
+    markUnDone() {
         self.is_done = false;
-    }
-})).views(self => ({
-    status() {
-        return self.is_done ? "Сделано" : "Не сделано"
     }
 }));
 
