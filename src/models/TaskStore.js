@@ -15,14 +15,8 @@ const TaskStore = types.model({
       const index = self.Todo.findIndex(todo => todo.id === task.id);
       self.Todo.splice(index, 1);
     },
-    showAll() {
-      self.selectedTab = 'all';
-    },
-    showDone() {
-      self.selectedTab = 'done';
-    },
-    showUndone() {
-      self.selectedTab = 'undone';
+    showTab(tab) {
+      self.selectedTab = tab;
     }
   }))
   .views(self =>({

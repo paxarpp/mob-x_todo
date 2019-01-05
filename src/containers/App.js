@@ -11,19 +11,9 @@ class App extends Component {
         store.remove(todo);
     }
 
-    showAll = () => {
+    showTab = (tab) => () => {
         const { store } = this.props;
-        store.showAll();
-    }
-
-    showDone = () => {
-        const { store } = this.props;
-        store.showDone();
-    }
-
-    showUndone = () => {
-        const { store } = this.props;
-        store.showUndone();
+        store.showTab(tab);
     }
 
     isActive = name => {
@@ -48,15 +38,15 @@ class App extends Component {
                 </header>
                 <div>
                     <Form store={store}/>
-                    <span className={`tab ${this.isActive('all')}`} onClick={this.showAll}>
+                    <span className={`tab ${this.isActive('all')}`} onClick={this.showTab('all')}>
                         все
                         <span className="tab__count">{store.Todo.length}</span>
                     </span>
-                    <span className={`tab ${this.isActive('done')}`} onClick={this.showDone}>
+                    <span className={`tab ${this.isActive('done')}`} onClick={this.showTab('done')}>
                         выполненные
                         <span className="tab__count">{store.doneTodo.length}</span>
                     </span>
-                    <span className={`tab ${this.isActive('undone')}`} onClick={this.showUndone}>
+                    <span className={`tab ${this.isActive('undone')}`} onClick={this.showTab('undone')}>
                         Не выполненные
                         <span className="tab__count">{store.undoneTodo.length}</span>
                     </span>
