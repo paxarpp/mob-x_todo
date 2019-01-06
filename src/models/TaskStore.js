@@ -2,6 +2,7 @@ import { types } from 'mobx-state-tree';
 import Todo from './Todo';
 import Tab from './Tab';
 import uuidv4 from 'uuid/v4';
+import { TAB_ID } from '../components/constants';
 
 const TaskStore = types.model({ 
   Todo: types.array(Todo),
@@ -34,10 +35,21 @@ const TaskStore = types.model({
     },
     get todoLengthByIdTab() {
       return ({
-        1: self.Todo.length, 
-        2: self.Todo.filter(t => t.is_done).length, 
-        3: self.Todo.filter(t => !t.is_done).length
+        [TAB_ID.ALL]: self.Todo.length, 
+        [TAB_ID.DONE]: self.Todo.filter(t => t.is_done).length, 
+        [TAB_ID.UNDONE]: self.Todo.filter(t => !t.is_done).length
       })
+    },
+    get activeTodoByTab() {
+      const activTabId = self.ActiveTabId;
+      return activTabId === TAB_ID.ALL ? 
+        self.Todo
+        :
+        activTabId === TAB_ID.DONE ?
+        self.doneTodo
+            :
+            activTabId === TAB_ID.UNDONE &&
+            self.undoneTodo
     }
   }));
 

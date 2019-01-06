@@ -7,14 +7,11 @@ import TaskStore from './models/TaskStore';
 //debugging tools
 import { onPatch } from 'mobx-state-tree';
 import makeInspectable from 'mobx-devtools-mst';
+import { TAB } from './components/constants';
 
 const store = TaskStore.create({
   Todo: [],
-  Tab: [
-    {title: 'все', isActive: true, id: 1},
-    {title: 'Выполненные', isActive: false, id: 2},
-    {title: 'не выполненные', isActive: false, id: 3},
-  ]
+  Tab: TAB
 });
 
 onPatch(store, patch => {

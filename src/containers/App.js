@@ -16,17 +16,9 @@ class App extends Component {
         const { store } = this.props;
         store.showTab(id);
     }
-  
+
     render() {
     const { store } = this.props;
-    const _todos = store.ActiveTabId === 1 ? 
-        store.Todo
-        :
-        store.ActiveTabId === 2 ?
-            store.doneTodo
-            :
-            store.ActiveTabId === 3 &&
-            store.undoneTodo
         return (
             <div className="App">
                 <header className="App-header">
@@ -44,7 +36,7 @@ class App extends Component {
                     }
                 </div>
                 <div className="card-container">
-                    {_todos.map((todo, i) => (
+                    {store.activeTodoByTab.map((todo, i) => (
                         <TodoCard todo={todo} key={i} handleRemove={this.handleRemove} />))
                     }
                 </div>
