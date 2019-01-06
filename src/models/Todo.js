@@ -4,7 +4,7 @@ const Todo = types.model({
         name: types.string,
         details: types.string,
         is_done: false,
-        id: types.string,
+        id: types.identifier,
     }
 ).actions(self => ({
     markDone() {

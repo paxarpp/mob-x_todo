@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react'; //These functions make our components observable and be able to use the store
+import { observer, inject } from 'mobx-react';
 import TodoCard from '../components/TodoCard';
 import Tab from '../components/Tab';
 import Form from '../components/Form';
+import ModalEditTodo from '../components/ModalEditTodo';
 import '../App.css';
 
 class App extends Component {
@@ -25,11 +26,11 @@ class App extends Component {
                     <h3 className="subtitle">Make a new To do</h3>
                 </header>
                 <div>
-                    <Form store={store}/>
+                    <Form store={store} />
                     {
-                        store.Tab.map((tb, i) => (
-                            <Tab tab={tb} 
-                                key={`${i}-${tb.title}`} 
+                        store.Tab.map((tab, i) => (
+                            <Tab tab={tab} 
+                                key={`${i}-${tab.title}`} 
                                 markActive={this.markActive}
                                 todoLengthByIdTab={store.todoLengthByIdTab} />
                         ))
@@ -37,9 +38,17 @@ class App extends Component {
                 </div>
                 <div className="card-container">
                     {store.activeTodoByTab.map((todo, i) => (
-                        <TodoCard todo={todo} key={i} handleRemove={this.handleRemove} />))
+                        <TodoCard 
+                            todo={todo} 
+                            key={i} 
+                            handleRemove={this.handleRemove} 
+                            selectTodo={store.selectTodo} />))
                     }
                 </div>
+                {
+                    store.selectedTodo &&
+                    <ModalEditTodo store={store} />
+                }
             </div>
         );
     }

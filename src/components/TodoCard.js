@@ -1,10 +1,16 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 
-const TodoCard = ({todo, handleRemove}) => (
+const TodoCard = ({todo, handleRemove, selectTodo}) => (
     <div className="card">
         <div className="card-body">
             <h4 className={`card-title ${todo.is_done ? 'done' : ''}`}>{todo.name}</h4>
+            <span className="edit" onClick={todo.is_done ? null : () => selectTodo(todo.id)}>
+                {
+                    !todo.is_done &&
+                    String.fromCharCode(9998)
+                }
+            </span>
             <span className="remover" onClick={handleRemove(todo)}>
                 {String.fromCharCode(10008)}
             </span>

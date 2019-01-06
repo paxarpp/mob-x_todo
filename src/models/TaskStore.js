@@ -7,6 +7,7 @@ import { TAB_ID } from '../components/constants';
 const TaskStore = types.model({ 
   Todo: types.array(Todo),
   Tab: types.array(Tab),
+  selectedTodo: types.safeReference(Todo),
 })
   .actions(self => ({
     add(task) {
@@ -17,12 +18,25 @@ const TaskStore = types.model({
       const index = self.Todo.findIndex(todo => todo.id === task.id);
       self.Todo.splice(index, 1);
     },
+    update(task) { 
+      self.Todo = self.Todo.map(todo => {
+        if (todo.id === task.id) {
+          return task;
+        } else {
+          return todo;
+        }
+      })
+    },
     showTab(id) {
       self.Tab = self.Tab.map(t => {
         t.isActive = id === t.id;
         return t;
       });
-    }}))
+    },
+    selectTodo(id) {
+      self.selectedTodo = id;
+    }
+}))
   .views(self =>({
     get doneTodo() {
       return self.Todo.filter(todo => todo.is_done);
