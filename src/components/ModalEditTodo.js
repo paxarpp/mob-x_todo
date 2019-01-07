@@ -2,22 +2,26 @@ import React, { Component } from 'react';
 
 class ModalEditTodo extends Component {
 
+    onSubmit = e => {
+        e.preventDefault();
+        const {
+            store
+        } = this.props;
+        const name = this.nameInput.value;
+        const details = this.detailsInput.value;
+        store.update({
+            ...store.selectedTodo,
+            name: name.trim() === '' ? store.selectedTodo.name : name,
+            details: details.trim() === '' ? store.selectedTodo.details : details,
+        });
+        store.selectTodo(undefined);
+    };
+
     render() {
         const {store} = this.props;
         return(
             <div className="modal">
-            <form
-                onSubmit={e =>{
-                e.preventDefault();
-                const name = this.nameInput.value;
-                const details = this.detailsInput.value;
-                store.update({
-                    ...store.selectedTodo,
-                    name: name.trim() === '' ? store.selectedTodo.name : name,
-                    details:  details.trim() === '' ? store.selectedTodo.details : details,
-                    });
-                store.selectTodo(undefined);
-                }}>
+                <form onSubmit={this.onSubmit}>
                     <input
                         className="input"
                         type="text"
@@ -35,7 +39,7 @@ class ModalEditTodo extends Component {
                         type="submit">
                         Edit
                     </button>
-            </form>
+                </form>
             </div>
         );
     }

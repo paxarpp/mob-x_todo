@@ -79,6 +79,15 @@
 .card-body {
   padding: 5px;
 }
+.card-body .bookmark__title {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background-color: #00a4ff;
+  margin: 0 5px;
+}
 .card-title {
   margin: 5px 10px 5px 26px;
 }

@@ -18,6 +18,14 @@ class App extends Component {
         store.showTab(id);
     }
 
+    handleAddBookmark = (todo) => e => {
+        console.log(e.target.value);
+        console.log(todo);
+        
+        
+        todo.addBookmark(e.target.value);
+    }
+
     render() {
     const { store } = this.props;
         return (
@@ -41,7 +49,8 @@ class App extends Component {
                         <TodoCard 
                             todo={todo} 
                             key={i} 
-                            handleRemove={this.handleRemove} 
+                            handleRemove={this.handleRemove}
+                            handleAddBookmark = {this.handleAddBookmark}
                             selectTodo={store.selectTodo} />))
                     }
                 </div>
