@@ -25,6 +25,10 @@ const TaskStore = types.model({
       self.Todo.splice(index, 1);
     },
     removeBookmark(mark) {
+      self.Todo.forEach(todo => {
+        const index = todo.bookmarks.findIndex(bookmark => mark.id === bookmark.id);
+        todo.bookmarks.splice(index, 1);
+      });
       const index = self.Bookmarks.findIndex(bookmark => mark.id === bookmark.id);
       self.Bookmarks.splice(index, 1);
     },

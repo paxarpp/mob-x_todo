@@ -88,9 +88,18 @@
   background-color: #00a4ff;
   margin: 0 5px;
 }
+.bookmark__title.disabled{
+  background-color: #00a4ff;
+  opacity: 0.5;
+}
 .bookmark-remover {
   margin-left: 10px;
   color: red;
+  cursor: pointer;
+}
+.bookmark-add {
+  margin-left: 10px;
+  color: blue;
   cursor: pointer;
 }
 .card-title {
