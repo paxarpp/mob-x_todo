@@ -1,12 +1,14 @@
 import { types } from 'mobx-state-tree';
 import Todo from './Todo';
 import Tab from './Tab';
+import Bookmark from './Bookmark';
 import uuidv4 from 'uuid/v4';
 import { TAB_ID } from '../components/constants';
 
 const TaskStore = types.model({ 
   Todo: types.array(Todo),
   Tab: types.array(Tab),
+  Bookmarks: types.array(Bookmark),
   selectedTodo: types.safeReference(Todo),
 })
   .actions(self => ({
@@ -14,9 +16,17 @@ const TaskStore = types.model({
       task.id = uuidv4();
       self.Todo.push(task);
     },
+    addBookmark(mark) {
+      mark.id = uuidv4();
+      self.Bookmarks.push(mark);
+    },
     remove(task) {
       const index = self.Todo.findIndex(todo => todo.id === task.id);
       self.Todo.splice(index, 1);
+    },
+    removeBookmark(mark) {
+      const index = self.Bookmarks.findIndex(bookmark => mark.id === bookmark.id);
+      self.Bookmarks.splice(index, 1);
     },
     update(task) { 
       self.Todo = self.Todo.map(todo => {

@@ -15,7 +15,7 @@ const Todo = types.model({
     markUnDone() {
         self.is_done = false;
     },
-    addBookmark(bookmark) {
+    addBookmarkInTodo(bookmark) {
         self.bookmarks.push(bookmark);
     }
 }));

@@ -4,6 +4,7 @@ import TodoCard from '../components/TodoCard';
 import Tab from '../components/Tab';
 import Form from '../components/Form';
 import ModalEditTodo from '../components/ModalEditTodo';
+import BookmarkList from '../components/BookmarkList';
 import '../App.css';
 
 class App extends Component {
@@ -19,11 +20,10 @@ class App extends Component {
     }
 
     handleAddBookmark = (todo) => e => {
-        console.log(e.target.value);
-        console.log(todo);
-        
-        
-        todo.addBookmark(e.target.value);
+        const { store } = this.props;
+        const id = e.target.value;
+        const mark = store.Bookmarks.find(item => item.id === id);
+        todo.addBookmarkInTodo(mark);
     }
 
     render() {
@@ -33,6 +33,13 @@ class App extends Component {
                 <header className="App-header">
                     <h3 className="subtitle">Make a new To do</h3>
                 </header>
+
+                <div className="mark-container">
+                    <BookmarkList 
+                        store={store}
+                        handleAddBookmark = {this.handleAddBookmark} />
+                </div>
+                
                 <div>
                     <Form store={store} />
                     {
@@ -48,9 +55,8 @@ class App extends Component {
                     {store.activeTodoByTab.map((todo, i) => (
                         <TodoCard 
                             todo={todo} 
-                            key={i} 
+                            key={i}
                             handleRemove={this.handleRemove}
-                            handleAddBookmark = {this.handleAddBookmark}
                             selectTodo={store.selectTodo} />))
                     }
                 </div>

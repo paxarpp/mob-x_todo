@@ -79,7 +79,7 @@
 .card-body {
   padding: 5px;
 }
-.card-body .bookmark__title {
+.bookmark__title {
   display: inline-block;
   font-size: 14px;
   line-height: 20px;
@@ -87,6 +87,11 @@
   border-radius: 10px;
   background-color: #00a4ff;
   margin: 0 5px;
+}
+.bookmark-remover {
+  margin-left: 10px;
+  color: red;
+  cursor: pointer;
 }
 .card-title {
   margin: 5px 10px 5px 26px;
@@ -147,4 +152,8 @@ form > label {
   margin: 10px;
   width: 92%;
   padding: 5px;
+}
+.mark-container {
+  float: right;
+  width: 200px;
 }

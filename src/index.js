@@ -11,7 +11,8 @@ import { TAB } from './components/constants';
 
 const store = TaskStore.create({
   Todo: [],
-  Tab: TAB
+  Tab: TAB,
+  Bookmarks: [],
 });
 
 onPatch(store, patch => {

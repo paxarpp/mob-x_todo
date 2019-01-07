@@ -6,7 +6,6 @@ const TodoCard = ({
         todo,
         handleRemove,
         selectTodo,
-        handleAddBookmark
     }) => (
     <div className="card">
         <div className="card-body">
@@ -23,13 +22,7 @@ const TodoCard = ({
             <div>
                 {todo.details}
             </div>
-            <div style={{position: 'relative', height: '20px'}}>
-                <select 
-                    className = "edit"
-                    onChange={handleAddBookmark(todo)} > 
-                    <option value={{id:'1', title: 'test'}}>test</option>
-                    <option value={{id:'2', title: '2test2'}}>test2</option>
-                </select>
+            <div>
                 {
                     todo.bookmarks.map((bookmark, index) => (
                         <BookmarkItem 
