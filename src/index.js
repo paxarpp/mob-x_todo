@@ -13,6 +13,7 @@ const store = TaskStore.create({
   Todo: [],
   Tab: TAB,
   Bookmarks: [],
+  selectedBookmarkIds: [],
 });
 
 onPatch(store, patch => {

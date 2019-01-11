@@ -57,7 +57,8 @@ class App extends Component {
                             todo={todo} 
                             key={i}
                             handleRemove={this.handleRemove}
-                            selectTodo={store.selectTodo} />))
+                            selectTodo={store.selectTodo} />
+                        ))
                     }
                 </div>
                 {

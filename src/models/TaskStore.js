@@ -10,6 +10,7 @@ const TaskStore = types.model({
   Tab: types.array(Tab),
   Bookmarks: types.array(Bookmark),
   selectedTodo: types.safeReference(Todo),
+  selectedBookmarkIds: types.array(types.string),
 })
   .actions(self => ({
     add(task) {
@@ -32,6 +33,14 @@ const TaskStore = types.model({
       const index = self.Bookmarks.findIndex(bookmark => mark.id === bookmark.id);
       self.Bookmarks.splice(index, 1);
     },
+    toggleSelectedBookmark(id) {
+      const index = self.selectedBookmarkIds.findIndex(bookmarkId => id === bookmarkId);
+      if (index === -1) {
+        self.selectedBookmarkIds.push(id);
+      } else {
+        self.selectedBookmarkIds.splice(index, 1);
+      }
+    },
     update(task) { 
       self.Todo = self.Todo.map(todo => {
         if (todo.id === task.id) {
@@ -53,10 +62,10 @@ const TaskStore = types.model({
 }))
   .views(self =>({
     get doneTodo() {
-      return self.Todo.filter(todo => todo.is_done);
+      return self.Todo.filter(todo => todo.is_done).filter(checkSelectmark(self));
     },
     get undoneTodo() {
-      return self.Todo.filter(todo => !todo.is_done);
+      return self.Todo.filter(todo => !todo.is_done).filter(checkSelectmark(self));
     },
     get ActiveTabId() {
       return self.Tab.find(t => t.isActive).id;
@@ -71,14 +80,27 @@ const TaskStore = types.model({
     get activeTodoByTab() {
       const activTabId = self.ActiveTabId;
       return activTabId === TAB_ID.ALL ? 
-        self.Todo
+        self.Todo.filter(checkSelectmark(self))
         :
         activTabId === TAB_ID.DONE ?
         self.doneTodo
             :
             activTabId === TAB_ID.UNDONE &&
             self.undoneTodo
+    },
+    get selectedBookmarkIdsEmpty() {
+      return self.selectedBookmarkIds.length === 0;
     }
   }));
 
 export default TaskStore;
+
+const checkSelectmark = (self) => todo => {
+  const has = self.selectedBookmarkIds.reduce((acc, id) => {
+    if (todo.bookmarks.find(mark => mark.id === id))
+      acc += 1;
+    return acc;
+  }, 0);
+  return has === self.selectedBookmarkIds.length;
+};
+

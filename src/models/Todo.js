@@ -24,7 +24,7 @@ const Todo = types.model({
         const index = self.bookmarks.findIndex(mark => mark.id === bookmark.id);
         if (index === -1) return;
         self.bookmarks.splice(index, 1);
-    }
+    },
 }));
 
 export default Todo;

@@ -19,6 +19,11 @@ class BookmarkList extends Component {
         store.removeBookmark(mark);
     }
 
+    changeSelectedBookmark = (id) => () => {
+        const { store } = this.props;
+        store.toggleSelectedBookmark(id);
+    }
+
     render() {
         const {store} = this.props;
         return  (
@@ -42,9 +47,10 @@ class BookmarkList extends Component {
             </form>
             <ul>
                 {
-                    store.Bookmarks.map((item, index) => (
-                        <li key={index}>
-                            <BookmarkItem bookmark={item} handleRemove={this.handleRemove} />
+                    store.Bookmarks.map((mark, index) => (
+                        <li key={index} className="boorkmark-list-item">
+                            <BookmarkItem bookmark={mark} handleRemove={this.handleRemove} />
+                            <input type="checkbox" onChange={this.changeSelectedBookmark(mark.id)} />
                         </li>
                     ))
                 }

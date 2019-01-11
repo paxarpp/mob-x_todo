@@ -27,7 +27,8 @@ const TodoCard = ({
                     todo.bookmarks.map((bookmark, index) => (
                         <BookmarkItem 
                             key={index}
-                            bookmark={bookmark} />))
+                            bookmark={bookmark} />
+                    ))
                 }
             </div>
         </div>

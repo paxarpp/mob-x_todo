@@ -166,3 +166,6 @@ form > label {
   float: right;
   width: 200px;
 }
+.boorkmark-list-item {
+  list-style: none;
+}
