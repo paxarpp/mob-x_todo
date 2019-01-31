@@ -9,65 +9,64 @@ import '../App.css';
 
 class App extends Component {
 
-    handleRemove = todo => () => {
-        const { store } = this.props;
-        store.remove(todo);
-    }
-
-    markActive = (id) => () => {
-        const { store } = this.props;
-        store.showTab(id);
-    }
-
-    handleAddBookmark = (todo) => e => {
-        const { store } = this.props;
-        const id = e.target.value;
-        const mark = store.Bookmarks.find(item => item.id === id);
-        todo.addBookmarkInTodo(mark);
-    }
-
-    render() {
+  handleRemove = todo => () => {
     const { store } = this.props;
-        return (
-            <div className="App">
-                <header className="App-header">
-                    <h3 className="subtitle">Make a new To do</h3>
-                </header>
+    store.remove(todo);
+  }
 
-                <div className="mark-container">
-                    <BookmarkList 
-                        store={store}
-                        handleAddBookmark = {this.handleAddBookmark} />
-                </div>
-                
-                <div>
-                    <Form store={store} />
-                    {
-                        store.Tab.map((tab, i) => (
-                            <Tab tab={tab} 
-                                key={`${i}-${tab.title}`} 
-                                markActive={this.markActive}
-                                todoLengthByIdTab={store.todoLengthByIdTab} />
-                        ))
-                    }
-                </div>
-                <div className="card-container">
-                    {store.activeTodoByTab.map((todo, i) => (
-                        <TodoCard 
-                            todo={todo} 
-                            key={i}
-                            handleRemove={this.handleRemove}
-                            selectTodo={store.selectTodo} />
-                        ))
-                    }
-                </div>
-                {
-                    store.selectedTodo &&
-                    <ModalEditTodo store={store} />
-                }
-            </div>
-        );
-    }
+  markActive = (id) => () => {
+    const { store } = this.props;
+    store.showTab(id);
+  }
+
+  handleAddBookmark = (todo) => e => {
+    const { store } = this.props;
+    const id = e.target.value;
+    const mark = store.Bookmarks.find(item => item.id === id);
+    todo.addBookmarkInTodo(mark);
+  }
+
+  render() {
+  const { store } = this.props;
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h3 className="subtitle">Make a new To do</h3>
+        </header>
+        <div className="mark-container">
+          <BookmarkList 
+            store={store}
+            handleAddBookmark = {this.handleAddBookmark} />
+        </div>
+        <div>
+          <Form store={store} />
+          {
+            store.Tab.map((tab, i) => (
+              <Tab 
+                tab={tab} 
+                key={`${i}-${tab.title}`} 
+                markActive={this.markActive}
+                todoLengthByIdTab={store.todoLengthByIdTab} />
+            ))
+          }
+        </div>
+        <div className="card-container">
+          {store.activeTodoByTab.map((todo, i) => (
+            <TodoCard 
+              todo={todo} 
+              key={i}
+              handleRemove={this.handleRemove}
+              selectTodo={store.selectTodo} />
+            ))
+          }
+        </div>
+        {
+          store.selectedTodo &&
+          <ModalEditTodo store={store} />
+        }
+      </div>
+    );
+  }
 }
 
 export default inject('store')(observer (App));
