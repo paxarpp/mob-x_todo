@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { inject } from 'mobx-react';
 
 class Form extends Component {
 
@@ -46,4 +47,4 @@ class Form extends Component {
   };
 }
 
-export default Form;
+export default inject('store')(Form);

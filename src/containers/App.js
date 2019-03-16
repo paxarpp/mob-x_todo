@@ -5,6 +5,7 @@ import Tab from '../components/Tab';
 import Form from '../components/Form';
 import ModalEditTodo from '../components/ModalEditTodo';
 import BookmarkList from '../components/BookmarkList';
+import FormMarker from '../components/FormMarker';
 import '../App.css';
 
 class App extends Component {
@@ -19,13 +20,6 @@ class App extends Component {
     store.showTab(id);
   }
 
-  handleAddBookmark = (todo) => e => {
-    const { store } = this.props;
-    const id = e.target.value;
-    const mark = store.Bookmarks.find(item => item.id === id);
-    todo.addBookmarkInTodo(mark);
-  }
-
   render() {
   const { store } = this.props;
     return (
@@ -34,11 +28,11 @@ class App extends Component {
           <h3 className="subtitle">Make a new To do</h3>
         </header>
         <div className="mark-container">
-          <BookmarkList
-            handleAddBookmark = {this.handleAddBookmark} />
+          <FormMarker />
+          <BookmarkList/>
         </div>
         <div>
-          <Form store={store} />
+          <Form />
           {
             store.Tab.map((tab, i) => (
               <Tab 
@@ -61,7 +55,7 @@ class App extends Component {
         </div>
         {
           store.selectedTodo &&
-          <ModalEditTodo store={store} />
+          <ModalEditTodo />
         }
       </div>
     );

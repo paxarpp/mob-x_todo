@@ -4,16 +4,6 @@ import BookmarkItem from './BookmarkItem';
 
 class BookmarkList extends Component {
 
-  onSubmit = e => {
-    e.preventDefault();
-    const { store } = this.props;
-    store.addBookmark({
-      title: this.nameInput.value,
-    });
-    e.target.reset();
-    this.nameInput.focus();
-  };
-
   handleRemove = (mark) => () => {
     const { store } = this.props;
     store.removeBookmark(mark);
@@ -26,37 +16,16 @@ class BookmarkList extends Component {
 
   render() {
     const {store} = this.props;
-    return  (
-      <>
-      <form onSubmit={this.onSubmit}>
-        <label  htmlFor="title">
-          маркер
-          <input
-            required
-            className="input"
-            type="text"
-            ref={input => (this.nameInput = input)}
-            id="title"
-          />
-        </label>
-        <button 
-          className="btn" 
-          type="submit">
-          Add
-        </button>
-      </form>
+    return (
       <ul>
         {
           store.Bookmarks.map((mark, index) => (
-            <li key={index} className="boorkmark-list-item">
-              <BookmarkItem bookmark={mark} handleRemove={this.handleRemove} />
-              <input type="checkbox" onChange={this.changeSelectedBookmark(mark.id)} />
-            </li>
-          ))
+          <li key={index} className="boorkmark-list-item">
+            <BookmarkItem bookmark={mark} handleRemove={this.handleRemove} />
+            <input type="checkbox" onChange={this.changeSelectedBookmark(mark.id)} />
+          </li>))
         }
-      </ul>
-      </>
-    );
+      </ul>);
   }
 }  
 

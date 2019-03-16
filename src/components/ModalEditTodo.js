@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BookmarkItem from '../components/BookmarkItem';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 class ModalEditTodo extends Component {
 
@@ -74,4 +74,4 @@ class ModalEditTodo extends Component {
   }
 }
 
-export default observer(ModalEditTodo);
+export default inject('store')(observer(ModalEditTodo));
