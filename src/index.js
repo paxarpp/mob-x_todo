@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
-import './index.css';
-import App from './containers/App';
-import TaskStore from './models/TaskStore';
 //debugging tools
 import { onPatch } from 'mobx-state-tree';
 import makeInspectable from 'mobx-devtools-mst';
+
+import './index.css';
+import App from './containers/App';
+import TaskStore from './models/TaskStore';
 import { TAB } from './components/constants';
 
 const store = TaskStore.create({

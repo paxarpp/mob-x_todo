@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import BookmarkItem from './BookmarkItem';
 
 class BookmarkList extends Component {
@@ -60,4 +60,4 @@ class BookmarkList extends Component {
   }
 }  
 
-export default observer(BookmarkList);
+export default inject('store')(observer(BookmarkList));

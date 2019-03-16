@@ -34,8 +34,7 @@ class App extends Component {
           <h3 className="subtitle">Make a new To do</h3>
         </header>
         <div className="mark-container">
-          <BookmarkList 
-            store={store}
+          <BookmarkList
             handleAddBookmark = {this.handleAddBookmark} />
         </div>
         <div>
