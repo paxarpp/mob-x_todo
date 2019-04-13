@@ -1,14 +1,4 @@
-import { types } from 'mobx-state-tree';
-import Bookmark from './Bookmark';
-
-const Todo = types.model({
-    name: types.string,
-    details: types.string,
-    is_done: false,
-    id: types.identifier,
-    bookmarks: types.array(Bookmark),
-  }
-).actions(self => ({
+export const TodoTypesActions = self => ({
   markDone() {
     self.is_done = true;
   },
@@ -25,6 +15,4 @@ const Todo = types.model({
     if (index === -1) return;
     self.bookmarks.splice(index, 1);
   },
-}));
-
-export default Todo;
+})
