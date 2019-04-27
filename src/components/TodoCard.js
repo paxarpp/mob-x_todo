@@ -26,15 +26,15 @@ const TodoCard = ({
         {
           todo.bookmarks.map((bookmark, index) => (
             <BookmarkItem 
-                key={index}
-                bookmark={bookmark} />
+              key={index}
+              bookmark={bookmark} />
           ))
         }
       </div>
     </div>
     <div className="status" onClick={!todo.is_done ? todo.markDone : todo.markUnDone}> 
       {
-          todo.is_done ? String.fromCharCode(10004) : ''
+        todo.is_done ? String.fromCharCode(10004) : ''
       }
     </div>
   </div>

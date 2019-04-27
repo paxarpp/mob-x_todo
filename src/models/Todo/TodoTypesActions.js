@@ -15,4 +15,4 @@ export const TodoTypesActions = self => ({
     if (index === -1) return;
     self.bookmarks.splice(index, 1);
   },
-})
+});

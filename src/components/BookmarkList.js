@@ -25,7 +25,8 @@ class BookmarkList extends Component {
             <input type="checkbox" onChange={this.changeSelectedBookmark(mark.id)} />
           </li>))
         }
-      </ul>);
+      </ul>
+    );
   }
 }  
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 
 const BookmarkItem = ({bookmark, handleRemove=null, handleAdd=null, disabled=false}) => (
-  < span className={`bookmark__title ${disabled && 'disabled'}`}>
+  <span className={`bookmark__title ${disabled && 'disabled'}`}>
   {
     bookmark.title
   }
