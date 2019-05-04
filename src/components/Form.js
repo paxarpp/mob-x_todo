@@ -16,7 +16,7 @@ class Form extends Component {
 
   render() {
     return(
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} className='create'>
         <label  htmlFor="name">
           Сделать
           <input

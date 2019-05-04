@@ -26,13 +26,14 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h3 className="subtitle">Make a new To do</h3>
+          <button className="open_form" onClick={store.toggleShowForm}>+</button>
         </header>
         <div className="mark-container">
           <FormMarker />
           <BookmarkList/>
         </div>
         <div>
-          <Form />
+          {store.showFormCreateTodo && <Form />}
           {
             store.Tab.map((tab, i) => (
               <Tab 

@@ -49,6 +49,13 @@
   padding: 10px;
   position: relative;
 }
+.card.done {
+  box-shadow: 0 0 3px 0px;
+}
+.card-details.done {
+  font-weight: 200;
+  color: gray;
+}
 .card .remover {
   position: absolute;
   top: 3px;
@@ -168,4 +175,14 @@ form > label {
 }
 .boorkmark-list-item {
   list-style: none;
+}
+form.create {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  display: flex;
+  flex-flow: column;
+  background-color: grey;
+  padding: 20px;
+  z-index: 999;
 }

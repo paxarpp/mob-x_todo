@@ -7,7 +7,7 @@ const TodoCard = ({
     handleRemove,
     selectTodo,
   }) => (
-  <div className="card">
+  <div className={`card ${todo.is_done ? 'done' : ''}`}>
     <div className="card-body">
       <h4 className={`card-title ${todo.is_done ? 'done' : ''}`}>{todo.name}</h4>
       <span className="edit" onClick={todo.is_done ? null : () => selectTodo(todo.id)}>
@@ -19,7 +19,7 @@ const TodoCard = ({
       <span className="remover" onClick={handleRemove(todo)}>
         {String.fromCharCode(10008)}
       </span>
-      <div>
+      <div className={`card-details ${todo.is_done ? 'done' : ''}`}>
         {todo.details}
       </div>
       <div>
