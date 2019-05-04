@@ -26,14 +26,19 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h3 className="subtitle">Make a new To do</h3>
-          <button className="open_form" onClick={store.toggleShowForm}>+</button>
+          <button className="btn" onClick={store.toggleShowForm}>
+            +
+          </button>
         </header>
         <div className="mark-container">
           <FormMarker />
           <BookmarkList/>
         </div>
         <div>
-          {store.showFormCreateTodo && <Form />}
+          {
+            store.showFormCreateTodo &&
+            <Form />
+          }
           {
             store.Tab.map((tab, i) => (
               <Tab 
@@ -45,12 +50,13 @@ class App extends Component {
           }
         </div>
         <div className="card-container">
-          {store.activeTodoByTab.map((todo, i) => (
-            <TodoCard 
-              todo={todo} 
-              key={i}
-              handleRemove={this.handleRemove}
-              selectTodo={store.selectTodo} />
+          {
+            store.activeTodoByTab.map((todo, i) => (
+              <TodoCard 
+                todo={todo} 
+                key={i}
+                handleRemove={this.handleRemove}
+                selectTodo={store.selectTodo} />
             ))
           }
         </div>

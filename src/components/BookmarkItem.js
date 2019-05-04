@@ -11,7 +11,7 @@ const BookmarkItem = ({bookmark, handleRemove=null, handleAdd=null, disabled=fal
       {String.fromCharCode(10008)}
     </span>
   }
-  { handleAdd &&
+  { handleAdd && !disabled &&
     <span className="bookmark-add" onClick={handleAdd(bookmark)}>
       {String.fromCharCode(43)}
     </span>

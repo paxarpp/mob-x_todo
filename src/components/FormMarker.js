@@ -28,7 +28,8 @@ class FormMarker extends Component {
         </label>
         <button 
           className="btn" 
-          type="submit">
+          type="submit"
+        >
           Add
         </button>
       </form>

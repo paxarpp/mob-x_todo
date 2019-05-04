@@ -10,11 +10,11 @@ class Form extends Component {
       name: this.nameInput.value,
       details: this.detailsInput.value,
     });
-    e.target.reset();
-    this.nameInput.focus();
+    store.toggleShowForm();
   };
 
   render() {
+    const { store } = this.props;
     return(
       <form onSubmit={this.onSubmit} className='create'>
         <label  htmlFor="name">
@@ -42,6 +42,9 @@ class Form extends Component {
           type="submit">
           Add
         </button>
+        <span className="close_form" onClick={store.toggleShowForm}>
+          {String.fromCharCode(10008)}
+        </span>
       </form>
     );
   };

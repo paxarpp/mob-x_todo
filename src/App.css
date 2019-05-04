@@ -186,3 +186,10 @@ form.create {
   padding: 20px;
   z-index: 999;
 }
+form .close_form {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
+  cursor: pointer;
+}

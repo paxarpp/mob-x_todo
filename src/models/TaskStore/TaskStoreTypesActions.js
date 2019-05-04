@@ -25,18 +25,16 @@ export const TaskStoreTypesActions = self => ({
     const index = self.selectedBookmarkIds.findIndex(bookmarkId => id === bookmarkId);
     if (index === -1) {
       self.selectedBookmarkIds.push(id);
-    }
-    else {
+    } else {
       self.selectedBookmarkIds.splice(index, 1);
     }
   },
   update(task) {
     self.Todo = self.Todo.map(todo => {
       if (todo.id === task.id) {
-      return task;
-      }
-      else {
-      return todo;
+        return task;
+      } else {
+        return todo;
       }
     });
   },

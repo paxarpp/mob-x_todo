@@ -50,22 +50,26 @@ class ModalEditTodo extends Component {
             store.selectedTodo.bookmarks.map((item, index) => (
               <BookmarkItem
                 disabled
+                handleRemove={this.handleRemove}
                 bookmark={item}
-                key={index} />
+                key={index}
+              />
             ))
           }
           <button 
             className="btn" 
-            type="submit">
+            type="submit"
+          >
             Edit
           </button>
           {
             store.Bookmarks.map((item, index) => (
               <BookmarkItem
                 bookmark={item}
-                key={index}
-                handleRemove={this.handleRemove}
-                handleAdd={this.handleAdd} />
+                key={index}        
+                handleAdd={this.handleAdd}
+                disabled={store.selectedTodo.bookmarks.find((self) => self.id === item.id)}
+              />
             ))
           }
         </form>
