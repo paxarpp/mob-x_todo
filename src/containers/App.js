@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import TodoCard from '../components/TodoCard';
-import Tab from '../components/Tab';
+import TodosList from '../components/TodosList';
+import TabsView from '../components/TabsView';
 import Form from '../components/Form';
 import ModalEditTodo from '../components/ModalEditTodo';
 import BookmarkList from '../components/BookmarkList';
@@ -39,26 +39,18 @@ class App extends Component {
             store.showFormCreateTodo &&
             <Form />
           }
-          {
-            store.Tab.map((tab, i) => (
-              <Tab 
-                tab={tab} 
-                key={`${i}-${tab.title}`} 
-                markActive={this.markActive}
-                todoLengthByIdTab={store.todoLengthByIdTab} />
-            ))
-          }
+          <TabsView 
+            tabs={store.Tab} 
+            markActive={this.markActive}
+            todoLengthByIdTab={store.todoLengthByIdTab}
+          />
         </div>
         <div className="card-container">
-          {
-            store.activeTodoByTab.map((todo, i) => (
-              <TodoCard 
-                todo={todo} 
-                key={i}
-                handleRemove={this.handleRemove}
-                selectTodo={store.selectTodo} />
-            ))
-          }
+          <TodosList 
+            activeTodoByTab={store.activeTodoByTab} 
+            handleRemove={this.handleRemove}
+            selectTodo={store.selectTodo}
+          />
         </div>
         {
           store.selectedTodo &&
