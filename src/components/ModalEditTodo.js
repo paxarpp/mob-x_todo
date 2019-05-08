@@ -31,6 +31,9 @@ class ModalEditTodo extends Component {
 
   render() {
     const {store} = this.props;
+    if (!store.selectedTodo) {
+      return null;
+    }
     return(
       <div className="modal">
         <form onSubmit={this.onSubmit}>

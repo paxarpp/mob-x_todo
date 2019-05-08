@@ -7,6 +7,7 @@ import ModalEditTodo from '../components/ModalEditTodo';
 import BookmarkList from '../components/BookmarkList';
 import FormMarker from '../components/FormMarker';
 import '../App.css';
+import { CREATE_TODO } from '../components/constants';
 
 class App extends Component {
 
@@ -20,25 +21,27 @@ class App extends Component {
     store.showTab(id);
   }
 
+  openModal = () => {
+    const { store } = this.props;
+    store.openModal(CREATE_TODO);
+  }
+
   render() {
   const { store } = this.props;
     return (
       <div className="App">
         <header className="App-header">
           <h3 className="subtitle">Make a new To do</h3>
-          <button className="btn" onClick={store.toggleShowForm}>
+          <button className="btn" onClick={this.openModal}>
             +
           </button>
         </header>
         <div className="mark-container">
           <FormMarker />
-          <BookmarkList/>
+          <BookmarkList />
         </div>
         <div>
-          {
-            store.showFormCreateTodo &&
-            <Form />
-          }
+          <Form />
           <TabsView 
             tabs={store.Tab} 
             markActive={this.markActive}
@@ -52,10 +55,7 @@ class App extends Component {
             selectTodo={store.selectTodo}
           />
         </div>
-        {
-          store.selectedTodo &&
-          <ModalEditTodo />
-        }
+        <ModalEditTodo />
       </div>
     );
   }

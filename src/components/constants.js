@@ -9,3 +9,5 @@ export const TAB = [
   {title: 'Выполненные', isActive: false, id: TAB_ID.DONE},
   {title: 'не выполненные', isActive: false, id: TAB_ID.UNDONE},
 ];
+
+export const CREATE_TODO = 'CREATE_TODO';

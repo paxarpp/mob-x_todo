@@ -5,5 +5,5 @@ export const initialState = {
   Tab: TAB,
   Bookmarks: [],
   selectedBookmarkIds: [],
-  showFormCreateTodo: false,
+  showModal: '',
 }

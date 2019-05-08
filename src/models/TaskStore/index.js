@@ -11,7 +11,7 @@ const TaskStore = types.model({
     Bookmarks: types.array(Bookmark),
     selectedTodo: types.safeReference(Todo),
     selectedBookmarkIds: types.array(types.string),
-    showFormCreateTodo: types.boolean,
+    showModal: types.string,
   })
   .actions(TaskStoreTypesActions)
   .views(TaskStoreTypesViews);

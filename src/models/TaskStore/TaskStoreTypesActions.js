@@ -47,7 +47,10 @@ export const TaskStoreTypesActions = self => ({
   selectTodo(id) {
     self.selectedTodo = id;
   },
-  toggleShowForm() {
-    self.showFormCreateTodo = !self.showFormCreateTodo;
+  openModal(nameModal) {
+    self.showModal = nameModal;
+  },
+  closeModal() {
+    self.showModal = '';
   }
 });

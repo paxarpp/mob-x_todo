@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
+import { CREATE_TODO } from './constants';
 
 class Form extends Component {
 
@@ -10,12 +11,13 @@ class Form extends Component {
       name: this.nameInput.value,
       details: this.detailsInput.value,
     });
-    store.toggleShowForm();
+    store.closeModal();
   };
 
   render() {
     const { store } = this.props;
     return(
+      store.showModal === CREATE_TODO &&
       <form onSubmit={this.onSubmit} className='create'>
         <label  htmlFor="name">
           Сделать
@@ -42,7 +44,7 @@ class Form extends Component {
           type="submit">
           Add
         </button>
-        <span className="close_form" onClick={store.toggleShowForm}>
+        <span className="close_form" onClick={store.closeModal}>
           {String.fromCharCode(10008)}
         </span>
       </form>
@@ -50,4 +52,4 @@ class Form extends Component {
   };
 }
 
-export default inject('store')(Form);
+export default inject('store')(observer(Form));
