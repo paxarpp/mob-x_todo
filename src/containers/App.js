@@ -31,7 +31,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h3 className="subtitle">Make a new To do</h3>
+          <h3 className="subtitle">Make a new Todo</h3>
           <button className="btn" onClick={this.openModal}>
             +
           </button>
@@ -61,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default inject('store')(observer (App));
+export default inject('store')(observer(App));
