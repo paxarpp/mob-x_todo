@@ -1,33 +1,20 @@
-import React, { Component } from 'react';
+import React, { useCallback } from 'react';
 import { observer, inject } from 'mobx-react';
-import BookmarkItem from './BookmarkItem';
+import BookmarkView from './BookmarkView';
 
-class BookmarkList extends Component {
+const BookmarkList = ({ store: { removeBookmark, toggleSelectedBookmark, Bookmarks = [] } }) => {
 
-  handleRemove = (mark) => () => {
-    const { store } = this.props;
-    store.removeBookmark(mark);
-  }
+  const handleRemove = useCallback((mark) => () => {
+    removeBookmark(mark);
+  }, [removeBookmark])
 
-  changeSelectedBookmark = (id) => () => {
-    const { store } = this.props;
-    store.toggleSelectedBookmark(id);
-  }
+  const changeSelectedBookmark = useCallback((id) => () => {
+    toggleSelectedBookmark(id);
+  }, [toggleSelectedBookmark])
 
-  render() {
-    const {store} = this.props;
-    return (
-      <ul>
-        {
-          store.Bookmarks.map((mark, index) => (
-          <li key={index} className="boorkmark-list-item">
-            <BookmarkItem bookmark={mark} handleRemove={this.handleRemove} />
-            <input type="checkbox" onChange={this.changeSelectedBookmark(mark.id)} />
-          </li>))
-        }
-      </ul>
-    );
-  }
+  return (
+    <BookmarkView bookmarks={Bookmarks} handleRemove={handleRemove} changeSelectedBookmark={changeSelectedBookmark} />
+  );
 }  
 
 export default inject('store')(observer(BookmarkList));
