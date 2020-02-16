@@ -38,7 +38,6 @@ class App extends Component {
           <BookmarkList />
         </div>
         <div>
-          <Form />
           <TabsView 
             tabs={store.Tab} 
             markActive={this.markActive}
@@ -51,9 +50,10 @@ class App extends Component {
             handleRemove={this.handleRemove}
             selectTodo={store.selectTodo}
           />
-          <button className="btn" onClick={this.openModal}>+</button>
+          <button className="btn width" onClick={this.openModal}>+</button>
         </div>
         <ModalEditTodo />
+        <Form />
       </div>
     );
   }

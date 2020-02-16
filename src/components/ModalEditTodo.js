@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import BookmarkItem from '../components/BookmarkItem';
+import SelectedMarkerView from './SelectedMarkerView';
+import MarkerView from './MarkerView';
 import { observer, inject } from 'mobx-react';
 
+const stopPropagation = (e) => e.stopPropagation();
 class ModalEditTodo extends Component {
 
   onSubmit = e => {
-    e.preventDefault();
-    const {
-      store
-    } = this.props;
+    stopPropagation(e);
+    const { store } = this.props;
     const name = this.nameInput.value;
     const details = this.detailsInput.value;
     store.update({
@@ -19,14 +19,21 @@ class ModalEditTodo extends Component {
     store.selectTodo(undefined);
   };
 
-  handleAdd = (mark) => () => {
+  handleAdd = (mark) => (e) => {
     const {store} = this.props;
+    stopPropagation(e);
     store.selectedTodo.addBookmarkInTodo({...mark});
   }
 
-  handleRemove = (mark) => () => {
+  handleRemove = (mark) => (e) => {
     const {store} = this.props;
+    stopPropagation(e);
     store.selectedTodo.removeBookmarkInTodo(mark);
+  }
+
+  onClose = () => {
+    const { store } = this.props;
+    store.selectTodo(undefined);
   }
 
   render() {
@@ -35,8 +42,8 @@ class ModalEditTodo extends Component {
       return null;
     }
     return(
-      <div className="modal">
-        <form onSubmit={this.onSubmit}>
+      <div className="modal" onClick={this.onClose}>
+        <div className={'form edit'} onClick={stopPropagation}>
           <input
             className="input"
             type="text"
@@ -49,33 +56,23 @@ class ModalEditTodo extends Component {
             ref={input => (this.detailsInput = input)}
             defaultValue={store.selectedTodo.details}
           />
-          {
-            store.selectedTodo.bookmarks.map(item => (
-              <BookmarkItem
-                disabled
-                handleRemove={this.handleRemove}
-                bookmark={item}
-                key={item.id}
-              />
-            ))
-          }
-          <button 
-            className="btn" 
-            type="submit"
-          >
-            Edit
-          </button>
-          {
-            store.Bookmarks.map(item => (
-              <BookmarkItem
-                bookmark={item}
-                key={item.id}        
-                handleAdd={this.handleAdd}
-                disabled={store.selectedTodo.bookmarks.find((self) => self.id === item.id)}
-              />
-            ))
-          }
-        </form>
+          <div className="marker_row">
+          <div className="marker_block">
+            <SelectedMarkerView bookmarks={store.selectedTodo.bookmarks} handleRemove={this.handleRemove} />
+          </div>
+          <div>
+            <button 
+              className="btn" 
+              onClick={this.onSubmit}
+            >
+              Edit
+            </button>
+          </div>
+          <div className="marker_block">
+            <MarkerView bookmarks={store.selectedTodo.bookmarks} handleAdd={this.handleAdd} Bookmarks={store.Bookmarks}/>
+          </div>
+          </div>
+        </div>
       </div>
     );
   }
