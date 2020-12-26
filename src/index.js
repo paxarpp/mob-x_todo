@@ -1,19 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
-//debugging tools
-import { onPatch } from 'mobx-state-tree';
 import makeInspectable from 'mobx-devtools-mst';
-
-import './index.css';
 import App from './containers/App';
-import TaskStore from './models/TaskStore';
-import { initialState } from './initialState';
+import { Store } from './models/Store';
+import { TAB } from './components/constants';
+import './index.css';
 
-const store = TaskStore.create(initialState);
-
-onPatch(store, patch => {
-  console.log(patch)
+const store = Store.create({
+  Todo: [],
+  Tabs: {
+    items: TAB,
+  },
+  Bookmarks: [],
+  selectedBookmarkIds: [],
+  showModal: '',
 });
 
 makeInspectable(store);

@@ -38,12 +38,6 @@ export const TaskStoreTypesActions = self => ({
       }
     });
   },
-  showTab(id) {
-    self.Tab = self.Tab.map(t => {
-      t.isActive = id === t.id;
-      return t;
-    });
-  },
   selectTodo(id) {
     self.selectedTodo = id;
   },

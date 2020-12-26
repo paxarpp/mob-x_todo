@@ -1,4 +1,4 @@
-export const TodoTypesActions = self => ({
+export const TodoActions = self => ({
   markDone() {
     self.is_done = true;
   },

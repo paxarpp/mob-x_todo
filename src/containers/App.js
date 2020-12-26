@@ -6,8 +6,8 @@ import Form from '../components/Form';
 import ModalEditTodo from '../components/ModalEditTodo';
 import BookmarkList from '../components/BookmarkList';
 import FormMarker from '../components/FormMarker';
-import '../App.css';
 import { CREATE_TODO } from '../components/constants';
+import '../App.css';
 
 class App extends Component {
 
@@ -18,7 +18,7 @@ class App extends Component {
 
   markActive = (id) => () => {
     const { store } = this.props;
-    store.showTab(id);
+    store.Tabs.showTab(id);
   }
 
   openModal = () => {
@@ -43,7 +43,7 @@ class App extends Component {
         <div>
           <Form />
           <TabsView 
-            tabs={store.Tab} 
+            tabs={store.Tabs.items} 
             markActive={this.markActive}
             todoLengthByIdTab={store.todoLengthByIdTab}
           />

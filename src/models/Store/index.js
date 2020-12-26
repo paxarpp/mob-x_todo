@@ -1,13 +1,14 @@
 import { types } from 'mobx-state-tree';
-import Todo from '../Todo/Todo';
-import Tab from '../Tab';
-import Bookmark from '../Bookmark';
+import Todo from './Todo/Todo';
+import { Tabs } from './Tab';
+import Bookmark from './Bookmark';
 import { TaskStoreTypesActions } from './TaskStoreTypesActions';
 import { TaskStoreTypesViews } from './TaskStoreTypesViews';
 
-const TaskStore = types.model({ 
+
+export const Store = types.model({ 
     Todo: types.array(Todo),
-    Tab: types.array(Tab),
+    Tabs,
     Bookmarks: types.array(Bookmark),
     selectedTodo: types.safeReference(Todo),
     selectedBookmarkIds: types.array(types.string),
@@ -15,5 +16,3 @@ const TaskStore = types.model({
   })
   .actions(TaskStoreTypesActions)
   .views(TaskStoreTypesViews);
-
-export default TaskStore;

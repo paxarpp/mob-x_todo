@@ -8,9 +8,6 @@ export const TaskStoreTypesViews = self => ({
   get undoneTodo() {
     return self.Todo.filter(todo => !todo.is_done).filter(checkSelectmark(self));
   },
-  get ActiveTabId() {
-    return self.Tab.find(t => t.isActive).id;
-  },
   get todoLengthByIdTab() {
     return ({
       [TAB_ID.ALL]: self.Todo.length,
@@ -19,7 +16,7 @@ export const TaskStoreTypesViews = self => ({
     });
   },
   get activeTodoByTab() {
-    const activTabId = self.ActiveTabId;
+    const activTabId = self.Tabs.ActiveTabId;
     return activTabId === TAB_ID.ALL ?
       self.Todo.filter(checkSelectmark(self))
       :
