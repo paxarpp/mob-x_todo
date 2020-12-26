@@ -32,16 +32,12 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h3 className="subtitle">Make a new Todo</h3>
-          <button className="btn" onClick={this.openModal}>
-            +
-          </button>
         </header>
         <div className="mark-container">
           <FormMarker />
           <BookmarkList />
         </div>
         <div>
-          <Form />
           <TabsView 
             tabs={store.Tabs.items} 
             markActive={this.markActive}
@@ -54,8 +50,10 @@ class App extends Component {
             handleRemove={this.handleRemove}
             selectTodo={store.selectTodo}
           />
+          <button className="btn width" onClick={this.openModal}>+</button>
         </div>
         <ModalEditTodo />
+        <Form />
       </div>
     );
   }

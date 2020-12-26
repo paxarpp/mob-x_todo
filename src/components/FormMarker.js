@@ -1,40 +1,37 @@
-import React, { Component } from 'react';
+import React, {  } from 'react';
 import { observer, inject } from 'mobx-react';
 
-class FormMarker extends Component {
-
-  onSubmit = e => {
-    e.preventDefault();
-    const { store } = this.props;
-    store.addBookmark({
-      title: this.nameInput.value,
-    });
-    e.target.reset();
-    this.nameInput.focus();
+const FormMarker = ({ store: { addBookmark } }) => {
+  const nameInput = React.createRef();
+  const onSubmit = () => {
+    if (!nameInput.current.value) {
+      return;
+    }
+    addBookmark({ title: nameInput.current.value });
+    nameInput.current.value = '';
+    nameInput.current.focus();
   };
 
-  render() {
-    return  (
-      <form onSubmit={this.onSubmit}>
-        <label  htmlFor="title">
-          маркер
-          <input
-            required
-            className="input"
-            type="text"
-            ref={input => (this.nameInput = input)}
-            id="title"
-          />
-        </label>
-        <button 
-          className="btn" 
-          type="submit"
-        >
-          Add
-        </button>
-      </form>
-    );
-  }
+  return  (
+    <div className={'form'}>
+      <label htmlFor="title">
+        маркер
+        <input
+          required
+          className="input"
+          type="text"
+          ref={nameInput}
+          id="title"
+        />
+      </label>
+      <button 
+        className="btn" 
+        onClick={onSubmit}
+      >
+        Add
+      </button>
+    </div>
+  );
 }  
 
 export default inject('store')(observer(FormMarker));
